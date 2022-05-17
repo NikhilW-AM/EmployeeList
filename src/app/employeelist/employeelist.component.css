@@ -1,0 +1,13 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+label {
+  font-size: large;
+}
+
+.row {
+  margin: 10px 0 10px 0;
+}
+
+i {
+  cursor: pointer;
+}

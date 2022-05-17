@@ -1,0 +1,136 @@
+<form [formGroup]="AddEmployeeForm" (ngSubmit)="onSubmit()">
+  {{AddEmployeeForm.value | json}}
+  <div class="container my-3 form-group justify-content-center">
+    <div class="row justify-content-center">
+      <div class="col-9 form-group  text-right">
+        <button class="btn btn-success float-end">Home</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3>Edit employee details</h3>
+      </div>
+
+    </div>
+    <div class="row d-flex form-group justify-content-center">
+      <div class="col-6">
+        <label>Name</label>
+        <input class="form-control" type="text" placeholder="Enter name" formControlName="name" name="name">
+      </div>
+      <div class="col-3">
+        <label>Date of Birth</label>
+        <input type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control " formControlName="date"
+          name="date">
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-center form-group">
+      <div class="col-3">
+        <label>Mobile </label>
+        <input class="form-control " type="tel" placeholder="Enter mobile number" formControlName="mobile"
+          name="mobile">
+      </div>
+      <div class="col-3 ">
+        <label>Email</label>
+        <input class="form-control " type="text" placeholder="E-mail" formControlName="email" name="email">
+      </div>
+      <div class="col-3 ">
+        <label>Password</label>
+        <input class="form-control " type="password" placeholder="password" formControlName="password" name="password">
+      </div>
+    </div>
+
+    <div class="row justify-content-center form-group">
+      <div class="col-9 ">
+        <label for="exampleFormControlTextarea1">Address</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" formControlName="address"
+          name="address"></textarea>
+      </div>
+    </div>
+
+    <div class="row justify-content-center form-group">
+      <div class="col-9">
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="exampleFormControlSelect1">Select country</label>
+            <select class="form-control" formControlName="country" name="country" (change)="selectCountry($event)">
+              <option disabled></option>
+              <option *ngFor="let country of countryArray" [value]="country.name">{{country.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-6">
+            <label for="exampleFormControlSelect1">Select state</label>
+            <select class="form-control" formControlName="state" name="state">
+              <option selected></option>
+              <option *ngFor="let state of stateArray" [defaultSelected]="employeeObj?.state === state.name">
+                {{state.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center" style="margin: 10px 0px 0 20px;">
+      <div class="col-9">
+        <strong><label>Gender</label></strong>
+      </div>
+      <div class="col-9">
+        <div class=" form-check form-check-inline">
+          <input class="form-check-input" type="radio" value="male" id="flexRadioDefault1" formControlName="gender"
+            name="gender">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Male
+          </label>
+        </div>
+        <div class=" form-check form-check-inline">
+          <input class="form-check-input" type="radio" value="female" id="flexRadioDefault2" formControlName="gender"
+            name="gender">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Female
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center" style="margin: 10px 0px 0 20px;">
+      <div class="col-9">
+        <strong><label>Hobbies</label></strong>
+      </div>
+      <div class="col-9" formArrayName="hobby">
+        <ng-container *ngFor="let hobby of quantities().controls; let i = index">
+          <div class="form-check form-check-inline" [formGroupName]="i">
+            <input class="form-check-input" type="checkbox" name="isCorrect" formControlName="isCorrect">
+            <label class="form-check-label" for="inlineCheckbox1">{{hobby.value.hob}}</label>
+          </div>
+        </ng-container>
+        <!-- <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" formControlName="hobby" name="hobby">
+                      <label class="form-check-label" for="inlineCheckbox2">Reading</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" formControlName="hobby" name="hobby">
+                      <label class="form-check-label" for="inlineCheckbox3">Playing</label>
+                  </div>-->
+      </div>
+    </div>
+
+    <div class="row justify-content-center" style="margin: 10px 0px 0 20px;">
+      <div class="col-9">
+        <div>
+          <strong><label>Communication skill</label></strong>
+        </div>
+        <ngx-slider [(value)]="value" [options]="options" formControlName="communication" name="communication">
+        </ngx-slider>
+      </div>
+    </div>
+
+
+    <div class="row justify-content-center mx-3">
+      <div class="col-9 form-group float-end">
+        <button type="submit" class="btn btn-primary mt-3 float-end"
+          [disabled]=" !AddEmployeeForm.valid">Update</button>
+      </div>
+    </div>
+  </div>
+</form>

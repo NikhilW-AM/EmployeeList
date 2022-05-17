@@ -1,0 +1,10 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+label {
+  font-size: large;
+  padding: 0px;
+}
+
+.row {
+  margin: 10px 0 10px 0;
+}
